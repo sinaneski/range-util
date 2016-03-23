@@ -62,7 +62,7 @@ public class RangeContainer <T extends Comparable<T>, E extends Range<T>> {
 
             E current = rangeList.get(i);
 
-            if(CompareUtil.lt(newRange.getEnd(), current.getStart())) {
+            if(CompareUtil.lessThan(newRange.getEnd(), current.getStart())) {
                 rangeList.add(i, newRange);
                 isFound = true;
                 break;
@@ -73,7 +73,7 @@ public class RangeContainer <T extends Comparable<T>, E extends Range<T>> {
                 break;
             }
 
-            if(CompareUtil.gt(newRange.getStart(), current.getEnd())) {
+            if(CompareUtil.greaterThan(newRange.getStart(), current.getEnd())) {
                 continue;
             }
 

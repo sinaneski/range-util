@@ -3,43 +3,37 @@ package se.range;
 /**
  * Basic compare operation for a Comparable class.
  * Operations:
- *      ge: Greater or Equal
- *      gt: GreaterThan
- *      le: Lower or Equal
- *      lt: LowerThan
- *      min: Minimum
- *      max: Maximum
  *
  * @author  Sinan Eski
  */
 public class CompareUtil {
 
-    public static <T extends Comparable<T>> boolean le (T first, T second) {
+    public static <T extends Comparable<T>> boolean lessOrEqualTo(T first, T second) {
         return first.compareTo(second) <= 0;
     }
 
-    public static <T extends Comparable<T>>  boolean lt (T first, T second) {
+    public static <T extends Comparable<T>>  boolean lessThan(T first, T second) {
         return first.compareTo(second) < 0;
     }
 
-    public static <T extends Comparable<T>> boolean ge (T first, T second) {
+    public static <T extends Comparable<T>> boolean greaterOrEqualTo(T first, T second) {
         return first.compareTo(second) >= 0;
     }
 
-    public static <T extends Comparable<T>>  boolean gt (T first, T second) {
+    public static <T extends Comparable<T>>  boolean greaterThan(T first, T second) {
         return first.compareTo(second) > 0;
     }
 
-    public static <T extends Comparable<T>> boolean eq (T first, T second) {
+    public static <T extends Comparable<T>> boolean equal(T first, T second) {
         return first.compareTo(second) == 0;
     }
 
-    public static <T extends Comparable<T>> T min(T first, T second) {
+    public static <T extends Comparable<T>> T selectMinimum(T first, T second) {
         if(first.compareTo(second) < 0) return first;
         return second;
     }
 
-    public static <T extends Comparable<T>>  T max( T first, T second) {
+    public static <T extends Comparable<T>>  T selectMaximum(T first, T second) {
         if(first.compareTo(second) > 0) return first;
         return second;
     }
