@@ -35,6 +35,6 @@ intersect(List<Range> ranges) | Apply intersect operation for all given ranges.
 **TimeRangeContainer** is an implementation of *RangeContainer<TimeRange, Range<Long>>* for sequential time interval operations. This class support *getTotalDuration()* method to measure total elapsed time.
   
   
-## LICENCE
-  
+## LICENSE
+ 
 This project is licensed under the terms of the MIT license.
