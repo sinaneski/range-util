@@ -69,13 +69,13 @@ public class RangeContainerTest {
 
     @Test
     public void intersect_ShouldChangeList_AsRange_8_9_WhenGivenRange_1_2_and_8_15() throws Exception {
-        List<Range<Long>> givenRangeToIntersectList = new ArrayList<>();
-        givenRangeToIntersectList.add(new Range<>(1L, 2L));
-        givenRangeToIntersectList.add(new Range<>(8L, 15L));
+        RangeContainer<Long, Range<Long>> givenRangeContainer = new RangeContainer<>();
+        givenRangeContainer.add(new Range<>(1L, 2L));
+        givenRangeContainer.add(new Range<>(8L, 15L));
 
         Range<Long> firstIndexRange = new Range<>(8L, 9L);
 
-        rangeContainer.intersect(givenRangeToIntersectList);
+        rangeContainer.intersect(givenRangeContainer);
 
         assertEquals(1, rangeContainer.size());
         assertEquals(firstIndexRange, rangeContainer.get(0));

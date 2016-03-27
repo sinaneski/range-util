@@ -94,7 +94,11 @@ public class RangeContainer <T extends Comparable<T>, E extends Range<T>> {
             rangeList.add(newRange);
     }
 
-    public void intersect(List<E> ranges) {
+    public void intersect(RangeContainer<T, E> ranges) {
+        intersect(ranges.rangeList);
+    }
+
+    private void intersect(List<E> ranges) {
         ranges.forEach(this::intersect);
     }
 
