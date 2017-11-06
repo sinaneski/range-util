@@ -59,25 +59,38 @@ public class RangeContainerTest {
     }
 
     @Test
-    public void intersect_ShouldChangeIndex_1_AsRange_8_9_WhenGivenRange_8_15() throws Exception {
-        Range<Long> givenRangeToIntersect = new Range<>(8L, 15L);
-        Range<Long> resultRange = new Range<>(8L, 9L);
-        rangeContainer.intersect(givenRangeToIntersect);
-        assertEquals(2, rangeContainer.size());
-        assertEquals(resultRange, rangeContainer.get(1));
-    }
-
-    @Test
     public void intersect_ShouldChangeList_AsRange_8_9_WhenGivenRange_1_2_and_8_15() throws Exception {
-        RangeContainer<Long, Range<Long>> givenRangeContainer = new RangeContainer<>();
-        givenRangeContainer.add(new Range<>(1L, 2L));
-        givenRangeContainer.add(new Range<>(8L, 15L));
+        RangeContainer<Long, Range<Long>> givenRangeToIntersectList = new RangeContainer<>();
+        givenRangeToIntersectList.add(new Range<>(1L, 2L));
+        givenRangeToIntersectList.add(new Range<>(8L, 15L));
 
         Range<Long> firstIndexRange = new Range<>(8L, 9L);
 
-        rangeContainer.intersect(givenRangeContainer);
+        RangeContainer<Long, Range<Long>> results = rangeContainer.intersect(givenRangeToIntersectList);
 
-        assertEquals(1, rangeContainer.size());
-        assertEquals(firstIndexRange, rangeContainer.get(0));
+        assertEquals(1, results.size());
+        assertEquals(firstIndexRange, results.get(0));
+    }
+
+    @Test
+    public void intersect_ShouldChangeList_AsRange_23_and_68_WhenGivenRange_01_24_45_57_78_78_and_1011() throws Exception {
+         RangeContainer<Long, Range<Long>> givenRangeToIntersectList = new RangeContainer<>();
+
+        givenRangeToIntersectList.add(new Range<>(0L, 1L));
+        givenRangeToIntersectList.add(new Range<>(2L, 4L));
+        givenRangeToIntersectList.add(new Range<>(4L, 5L));
+        givenRangeToIntersectList.add(new Range<>(5L, 7L));
+        givenRangeToIntersectList.add(new Range<>(7L, 8L));
+        givenRangeToIntersectList.add(new Range<>(7L, 8L));
+        givenRangeToIntersectList.add(new Range<>(10L, 11L));
+
+
+        Range<Long> firstIndexRange = new Range<>(2L, 3L);
+        Range<Long> secondIndexRange = new Range<>(6L, 8L);
+        RangeContainer<Long, Range<Long>> results = rangeContainer.intersect(givenRangeToIntersectList);
+
+        assertEquals(2, results.size());
+        assertEquals(firstIndexRange, results.get(0));
+        assertEquals(secondIndexRange, results.get(1));
     }
 }

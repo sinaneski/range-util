@@ -40,12 +40,13 @@ public class Range <T extends Comparable<T>> {
 
     }
 
-    public void intersect(Range<T> other) {
+    public Range<T> intersect(Range<T> other) {
 
-        if(!isIntersect(other)) return;
-        if(CompareUtil.greaterThan(other.start, start)) start = other.start;
-        if(CompareUtil.lessThan(other.end, end)) end = other.end;
-
+        if(!isIntersect(other)) return null;
+        T s = start, e = end;
+        if(CompareUtil.greaterThan(other.start, start)) s = other.start;
+        if(CompareUtil.lessThan(other.end, end)) e = other.end;
+        return new Range<>(s, e);
     }
 
     public void remove(Range<T> other) {

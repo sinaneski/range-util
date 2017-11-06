@@ -8,7 +8,7 @@ import java.util.List;
  *
  * @author  Sinan Eski
  * @param <T> range type which implements Comparable
- * @param <E> container elements type which implements Range<T>
+ * @param <E> container elements type which implements Range
  */
 public class RangeContainer <T extends Comparable<T>, E extends Range<T>> {
 
@@ -94,28 +94,36 @@ public class RangeContainer <T extends Comparable<T>, E extends Range<T>> {
             rangeList.add(newRange);
     }
 
-    public void intersect(RangeContainer<T, E> ranges) {
-        intersect(ranges.rangeList);
-    }
+    public  RangeContainer<T, E> intersect(RangeContainer<T, E> secondRangeList) {
+        RangeContainer<T, E> results = new RangeContainer<>();
+        int j = 0;
+        int i = 0;
 
-    private void intersect(List<E> ranges) {
-        ranges.forEach(this::intersect);
-    }
-
-    public void intersect(E range) {
-
-        if(range.isBefore(getFirst())) return;
-
-        if(range.isAfter(getLast())) return;
-
-        for (int i = 0; i < rangeList.size(); i++) {
+        while( i < rangeList.size() && j < secondRangeList.size()) {
             E current = rangeList.get(i);
-            if (range.isBefore(current)) break;
-            current.intersect(range);
-            if(current.isEmpty()) {
-                rangeList.remove(i--);
+            E range = secondRangeList.get(j);
+            if (range.isBefore(current)) {
+                j++;
+                continue;
             }
+            if (range.isAfter(current)) {
+                i++;
+                continue;
+            }
+            E result = (E) current.intersect(range);
+
+            if (!result.isEmpty()) {
+                results.add(result);
+            }
+
+            if (CompareUtil.greaterThan(current.getEnd(), result.getEnd())) {
+                j++;
+                continue;
+            }
+            i++;
         }
+
+        return results;
     }
 
     public void clear() {
