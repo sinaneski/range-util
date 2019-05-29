@@ -1,4 +1,4 @@
-# range-util
+# range-util [![Build Status](https://travis-ci.org/sinaneski/range-util.svg?branch=master)](https://travis-ci.org/sinaneski/range-util)
 
 range-util is generic **Range** and **RangeContainer** implementation. 
 
